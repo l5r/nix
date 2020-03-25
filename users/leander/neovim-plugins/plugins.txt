@@ -1,0 +1,10 @@
+Lokaltog/neoranger
+dhruvasagar/vim-table-mode
+guns/vim-sexp
+honza/vim-snippets
+tpope/vim-bundler
+tpope/vim-rails
+tpope/vim-sexp-mappings-for-regular-people
+vim-pandoc/vim-pandoc
+vim-pandoc/vim-pandoc-syntax
+wlangstroth/vim-racket

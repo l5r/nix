@@ -45,9 +45,7 @@
         coc-lists
         coc-highlight
         # coc-metals
-      ] ++ (with (import ./neovim-plugins args); [
-        neoranger
-      ]);
+      ] ++ (builtins.attrValues (import ./neovim-plugins args));
   };
 
 }
