@@ -2,8 +2,11 @@
 { config, pkgs, ... }@args:
 {
 
+  home.packages = [ pkgs.solargraph pkgs.neovim-qt ];
+
   xdg.configFile."nvim/after/ftplugin/racket.vim".text = ''
     imap <buffer> <C-L> λ
+    setlocal foldmarker=(,)
   '';
 
   programs.neovim = {
@@ -44,7 +47,7 @@
         coc-git
         coc-lists
         coc-highlight
-        # coc-metals
+        coc-metals
       ] ++ (builtins.attrValues (import ./neovim-plugins args));
   };
 

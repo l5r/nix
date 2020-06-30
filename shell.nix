@@ -11,6 +11,7 @@
     neovim tmux
     usbutils pciutils
     killall
+    file
 
     ripgrep exa fzf ranger
 

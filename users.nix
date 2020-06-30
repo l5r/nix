@@ -3,10 +3,9 @@
 
 let
   usernames = [ "leander" ];
-  home-manager = builtins.fetchGit {
-    url = "https://github.com/rycee/home-manager.git";
-    rev = "0d1ca254d0f213a118459c5be8ae465018132f74";
-    ref = "release-19.09";
+  home-manager = builtins.fetchTarball {
+    url = "https://github.com/rycee/home-manager/archive/5969551a5cc52f9470b5ff5ca01327bf4bda82c1.tar.gz";
+    sha256 = "0f4kz83a1kp3ci8zi5hvp8fp34wi73arpykl4d9vlywdk6w36bnd";
   };
 in
 {
@@ -26,6 +25,9 @@ in
       "sway"
       "video"
       "audio"
+      "adbusers"
+      "vboxusers"
+      "libvirtd"
     ];
   };
 

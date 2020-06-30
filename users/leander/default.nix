@@ -8,6 +8,11 @@
     ./fish.nix
     ./fonts.nix
     ./kitty.nix
+    ./mail.nix
+    ./music.nix
+    ./elementary-applications.nix
+    ./gdrive.nix
+    ./remarkable.nix
   ];
 
   home.packages = with pkgs; [
@@ -17,39 +22,40 @@
     htop
     wtf
     neofetch
+    xdg_utils
+    xorg.xhost
+
+    (pkgs.callPackage (import ./lock.nix) {})
 
     # applications
     inkscape
-    spotifyd
-    spotify
-    kupfer
-    pavucontrol
+    gimp
+    libreoffice-fresh
+    languagetool
+    eid-mw
+    commonsCompress
+    unzip
+    p7zip
+    xarchiver
+    transmission-gtk
+    gparted
+    gptfdisk
+    gnome3.gnome-disk-utility
+    kdeconnect
+    feedreader
+
+    google-drive-ocamlfuse
+    pdfarranger
 
     # games
     steam
+    steam-run
     multimc
     discord
-
   ];
 
   nixpkgs.config.allowUnfree = true;
 
-  # services.spotify = {
-  #   enable = true;
-  #   settings = {
-  #     global =
-  #       (import ./credentials.nix).spotify // {
-  #         backend = "pulseaudio";
-  #         volume_normalization = true;
-  #       };
-  #   };
-  # };
-
-  # Needed for pulseaudio
-  xsession.enable = true;
-  xsession.windowManager.command = "sway";
-
   # xdg.enable = true;
-  gtk.enable = true;
 }
 

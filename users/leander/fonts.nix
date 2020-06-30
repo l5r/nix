@@ -15,8 +15,8 @@
     ideogram
   ];
 
-  # programs = {
-  #   kitty.font.name = "Fira Code 11";
-  # };
+  programs = {
+    kitty.font.name = "FiraCode Nerd Font";
+  };
 
 }

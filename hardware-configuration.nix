@@ -14,22 +14,37 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "rpool/root/nixos";
+    { device = "rpool/secure/nixos";
       fsType = "zfs";
     };
 
   fileSystems."/nix" =
-    { device = "rpool/root/nixos/nix";
+    { device = "rpool/secure/nixos/nix";
+      fsType = "zfs";
+    };
+    
+  fileSystems."/etc/nixos" =
+    { device = "rpool/secure/nixos/configuration";
       fsType = "zfs";
     };
 
   fileSystems."/tmp" =
-    { device = "rpool/root/tmp";
-      fsType = "zfs";
+    { # device = "rpool/root/tmp";
+      fsType = "tmpfs";
     };
 
   fileSystems."/home" =
-    { device = "rpool/home";
+    { device = "rpool/secure/home";
+      fsType = "zfs";
+    };
+
+  fileSystems."/usr/local/steam" =
+    { device = "rpool/secure/steam";
+      fsType = "zfs";
+    };
+
+  fileSystems."/usr/local/vms" =
+    { device = "rpool/secure/vms";
       fsType = "zfs";
     };
 

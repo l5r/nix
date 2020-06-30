@@ -17,10 +17,10 @@ with pkgs.vimUtils; with pkgs; {
   
 
     table-mode = buildVimPluginFrom2Nix {
-      name = "table-mode-git-2020-03-02";
+      name = "table-mode-git-2020-05-06";
       src = fetchTarball {
-        url = "https://github.com/dhruvasagar/vim-table-mode/archive/6412352b544bda764a9616c3090abb09729526bc.tar.gz";
-        sha256 = "1z5v849vjbk4mdgkxs73b2nnvmqx7l6h3ycdb16qdhp9kppwmbvv";
+        url = "https://github.com/dhruvasagar/vim-table-mode/archive/640400908075c50704e127448175d3ede6bba2e9.tar.gz";
+        sha256 = "0gbj324wwgai1kprn78srq3cvldpi6hx9gsr5kk2sn2yxq32xp3y";
        };
       meta = {
         homepage = https://github.com/dhruvasagar/vim-table-mode; 
@@ -43,10 +43,10 @@ with pkgs.vimUtils; with pkgs; {
   
 
     snippets = buildVimPluginFrom2Nix {
-      name = "snippets-git-2020-03-19";
+      name = "snippets-git-2020-06-28";
       src = fetchTarball {
-        url = "https://github.com/honza/vim-snippets/archive/6e6b69fd5c12d4645225e7a3ba7d9f3414d83d25.tar.gz";
-        sha256 = "0hc914c74dy22nm9bx2qd37py8f2xf3ylnfr3v4lvbxpnlpahjjc";
+        url = "https://github.com/honza/vim-snippets/archive/3f805a0101e5fdfea4eab992af5aa50e8a242459.tar.gz";
+        sha256 = "0ybysjzxpka7lkqd9fjj1nk8byr8g96a3ykmcq0m6xwwyv8732x5";
        };
       meta = {
         homepage = https://github.com/honza/vim-snippets; 
@@ -69,10 +69,10 @@ with pkgs.vimUtils; with pkgs; {
   
 
     rails = buildVimPluginFrom2Nix {
-      name = "rails-git-2020-01-17";
+      name = "rails-git-2020-06-19";
       src = fetchTarball {
-        url = "https://github.com/tpope/vim-rails/archive/64befc6187678893082bebb8be79c1d17fdd07ba.tar.gz";
-        sha256 = "1yjqxqx3g74afzdq8iqd6zw7ypn6dv1i14qi9a7jnnwnp956lc12";
+        url = "https://github.com/tpope/vim-rails/archive/187742a3c18d93e6968f024d7db0f4fc5548408e.tar.gz";
+        sha256 = "132rvyn5pwg5xkm6q64k33vm6q9hfpng0wq25387l8l8a7hvj3az";
        };
       meta = {
         homepage = https://github.com/tpope/vim-rails; 
@@ -95,10 +95,10 @@ with pkgs.vimUtils; with pkgs; {
   
 
     pandoc = buildVimPluginFrom2Nix {
-      name = "pandoc-git-2020-03-20";
+      name = "pandoc-git-2020-05-15";
       src = fetchTarball {
-        url = "https://github.com/vim-pandoc/vim-pandoc/archive/c473c298d570622d520f455698a95356e55d6dcf.tar.gz";
-        sha256 = "1j4plsm7md6yhis8bmgznwln12gnnm0lg9wvxgydqd6wxrc6hfnd";
+        url = "https://github.com/vim-pandoc/vim-pandoc/archive/e49f9e7e3fc041dab0e9a1de4b564b3ddd8f77aa.tar.gz";
+        sha256 = "0i1zcnsc962bzm3q6kw8bldd9xh6vb7kw0j72c4dzwdw4ayx0wf1";
        };
       meta = {
         homepage = https://github.com/vim-pandoc/vim-pandoc; 
@@ -121,10 +121,10 @@ with pkgs.vimUtils; with pkgs; {
   
 
     racket = buildVimPluginFrom2Nix {
-      name = "racket-git-2020-03-16";
+      name = "racket-git-2020-06-23";
       src = fetchTarball {
-        url = "https://github.com/wlangstroth/vim-racket/archive/65e6e61e4492fefdddd992158d784cc751401590.tar.gz";
-        sha256 = "1ai5fh6m708grialss5kyy9cxi603zc880mswy9r6f6q58j78idq";
+        url = "https://github.com/wlangstroth/vim-racket/archive/4dc9840cdcddf4740553c920f56435b0e016abb0.tar.gz";
+        sha256 = "19ah9g8qi2gy1kfg7nh1cdjl7hyxk3pqd28in7jh5w760356zahg";
        };
       meta = {
         homepage = https://github.com/wlangstroth/vim-racket; 

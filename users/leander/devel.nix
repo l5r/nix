@@ -4,7 +4,13 @@
   services.lorri.enable = true;
 
   home.packages = with pkgs; [
-    direnv lorri
+    direnv lorri niv
+
+    httpie
+
+    (lowPrio racket)
+
+    gdb
 
     # Ruby on rails
     # bundix

@@ -17,15 +17,25 @@ let
 in
 {
 
+  # nixpkgs.overlays = [
+  #   (import (builtins.fetchTarball {
+  #     url = "https://github.com/colemickens/nixpkgs-wayland/archive/d3ecfac3b3533c02e7ac7e9afdf0acc7a3c25026.tar.gz";
+  #     sha256 = "1267jpx1n1gf3g2m405qacqldza4jzqa46zkdjg64racgchfbnay";
+  #   }))
+  # ];
+
   programs.sway = {
     enable = true;
     extraPackages = with pkgs; [
-      swaylock # lockscreen
+      swaylock-fancy # lockscreen
       swayidle
       xwayland # for legacy apps
       waybar # status bar
       mako # notification daemon
       kanshi # autorandr
+      wofi
+      wl-clipboard
+      # wlogout
     ];
     extraSessionCommands = ''
       export SDL_VIDEODRIVER=wayland
@@ -34,6 +44,10 @@ in
       export _JAVA_AWT_WM_NONREPARENTING=1
       export MOZ_ENABLE_WAYLAND=1
     '';
+    wrapperFeatures = {
+      base = true;
+      gtk = true;
+    };
   };
 
   # environment = {
@@ -53,24 +67,24 @@ in
   systemd.user.targets.sway-session = {
     description = "Sway compositor session";
     documentation = [ "man:systemd.special(7)" ];
-    bindsTo = [ "graphical-session.target" ];
-    wants = [ "graphical-session-pre.target" ];
-    after = [ "graphical-session-pre.target" ];
+    # bindsTo = [ "graphical-session.target" ];
+    # wants = [ "graphical-session-pre.target" ];
+    # after = [ "graphical-session-pre.target" ];
   };
 
   systemd.user.services.sway = {
     description = "Sway - Wayland window manager";
     documentation = [ "man:sway(5)" ];
-    bindsTo = [ "graphical-session.target" ];
-    wants = [ "graphical-session-pre.target" ];
-    after = [ "graphical-session-pre.target" ];
+    # bindsTo = [ "graphical-session.target" ];
+    # wants = [ "graphical-session-pre.target" ];
+    # after = [ "graphical-session-pre.target" ];
     # We explicitly unset PATH here, as we want it to be set by
     # systemctl --user import-environment in startsway
     environment.PATH = lib.mkForce null;
     serviceConfig = {
       Type = "simple";
       ExecStart = ''
-        ${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --debug
+        ${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway
       '';
       Restart = "on-failure";
       RestartSec = 1;
@@ -79,17 +93,21 @@ in
   };
 
   services.redshift = {
-    enable = false;
+    enable = true;
     # Redshift with wayland support isn't present in nixos-19.09 atm. You have to cherry-pick the commit from https://github.com/NixOS/nixpkgs/pull/68285 to do that.
     package = pkgs.redshift-wlr;
+  };
+  location.provider = "geoclue2";
+  services.geoclue2 = {
+    enable = true;
   };
 
   programs.waybar.enable = true;
 
   systemd.user.services.kanshi = {
     description = "Kanshi output autoconfig ";
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
+    wantedBy = [ "sway.service" ];
+    partOf = [ "sway-session.target" ];
     serviceConfig = {
       # kanshi doesn't have an option to specifiy config file yet, so it looks
       # at .config/kanshi/config
