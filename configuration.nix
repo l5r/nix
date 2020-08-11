@@ -18,7 +18,9 @@ in {
       ./virtualbox.nix
       ./libvirtd.nix
       ./zerotier.nix
+      ./nas.nix
       ./eid.nix
+      ./wine.nix
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_5_6;

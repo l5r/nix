@@ -22,15 +22,26 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    forwardX11 = true;
+  };
+
+  programs.mosh.enable = true;
 
   environment.systemPackages = with pkgs; [
     sshfs
   ];
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [
+    # SSH
+    22
+  ];
+  networking.firewall.allowedUDPPorts = [
+    # Avahi
+    5353
+  ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

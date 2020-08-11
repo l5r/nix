@@ -60,7 +60,7 @@ in
   # };
 
   # Here we but a shell script into path, which lets us start sway.service (after importing the environment of the login shell).
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     startsway
   ];
 
@@ -84,7 +84,7 @@ in
     serviceConfig = {
       Type = "simple";
       ExecStart = ''
-        ${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway
+        ${startsway}/bin/startsway
       '';
       Restart = "on-failure";
       RestartSec = 1;

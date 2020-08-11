@@ -43,6 +43,7 @@
     gnome3.gnome-disk-utility
     kdeconnect
     feedreader
+    teams
 
     google-drive-ocamlfuse
     pdfarranger
