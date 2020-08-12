@@ -3,6 +3,7 @@
 
 {
   imports = [
+    ./sway.nix
     ./neovim.nix
     ./devel.nix
     ./fish.nix
