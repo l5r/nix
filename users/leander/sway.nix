@@ -1,8 +1,6 @@
 
 { config, pkgs, lib, ... }:
 with rec {
-  # Logo key. Use Mod1 for Alt. Use Mod4 for ⌘.
-  modifier = "Mod1";
   terminal = "${pkgs.kitty}/bin/kitty";
   commands = rec {
     terminalDialog = "${terminal} --class dialog -o remember_window_size=no -o initial_window_height=540 --";
@@ -15,13 +13,15 @@ with rec {
     enable = true;
     config = {
       menu = commands.menu;
+      # Logo key. Use Mod1 for Alt. Use Mod4 for ⌘.
+      modifier = "Mod4";
 
       # Use Polybar instead
       bars = [];
 
       input = {
         "type:keyboard" = {
-	  xkb_options = "ctrl:nocaps,altwin:swap_lalt_lwin";
+	  xkb_options = "ctrl:nocaps";
 	  xkb_layout = "us,be";
 	  xkb_variant = ",";
 	  xkb_numlock = "enabled";
@@ -81,5 +81,50 @@ with rec {
       ];
     };
   };
+
+  # Waybar config
+  xdg.configFile."waybar/config".text = builtins.toJSON {
+    layer = "top";
+    modules-left = ["sway/workspaces" "sway/mode"];
+    modules-center = ["sway/window"];
+    modules-right = ["battery" "clock"];
+    "sway/window" = {
+        max-length = 50;
+    };
+    battery = {
+        format = "{capacity}% {icon}";
+        format-icons = ["" "" "" "" ""];
+    };
+    clock = {
+        format-alt = "{:%F %H:%M}";
+    };
+  };
+
+  xdg.configFile."waybar/style.css".text = ''
+    * {
+      border: none;
+      border-radius: 0;
+      /* `otf-font-awesome` is required to be installed for icons */
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      min-height: 0;
+    }
+
+    #clock,
+    #battery,
+    #cpu,
+    #memory,
+    #temperature,
+    #backlight,
+    #network,
+    #pulseaudio,
+    #custom-media,
+    #tray,
+    #mode,
+    #idle_inhibitor,
+    #mpd {
+      margin: 0 1rem;
+    }
+  '';
 }
 
