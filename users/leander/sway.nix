@@ -6,9 +6,21 @@ with rec {
     terminalDialog = "${terminal} --class dialog -o remember_window_size=no -o initial_window_height=540 --";
     menu = "${pkgs.wofi}/bin/wofi -iI -S drun,run";
     keyboardSwitcher = ''${terminalDialog} sh -c 'printf "0 us\n1 be" | ${pkgs.fzf}/bin/fzf | cut -d " " -f 1 | xargs ${pkgs.sway}/bin/swaymsg input type:keyboard xkb_switch_layout' '';
+    windowSelect = pkgs.writeScriptBin "window-select" ''
+    #!${pkgs.stdenv.shell}
+
+      jq_query='.. | select(.type? =="workspace" and .num?) | .num as $num | .nodes | .. | select(.name? and .type == "con") | .num = $num | (.id | tostring) + "\t[" + (.num | tostring) + "] " + .name'
+      
+    ${pkgs.sway}/bin/swaymsg -t get_tree | \
+      ${pkgs.jq}/bin/jq -r "$jq_query" | \
+      ${pkgs.fzf}/bin/fzf --with-nth 2.. | \
+      cut -f 1 | \
+      xargs -i ${pkgs.sway}/bin/swaymsg [con_id={}] focus
+    '';
   };
 };
 {
+  home.packages = [commands.windowSelect];
   wayland.windowManager.sway = {
     enable = true;
     config = {
@@ -44,6 +56,7 @@ with rec {
         "${modifier}+Return" = "exec ${terminal}";
         "${modifier}+s" = "exec ${commands.menu}";
         "${modifier}+Ctrl+k" = "exec ${commands.keyboardSwitcher}";
+        "${modifier}+w" = "exec ${commands.terminalDialog} ${commands.windowSelect}/bin/window-select";
 
         # Media keys
         "XF86AudioRaiseVolume"  = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
@@ -87,7 +100,7 @@ with rec {
     layer = "top";
     modules-left = ["sway/workspaces" "sway/mode"];
     modules-center = ["sway/window"];
-    modules-right = ["battery" "clock"];
+    modules-right = ["tray" "battery" "clock"];
     "sway/window" = {
         max-length = 50;
     };
